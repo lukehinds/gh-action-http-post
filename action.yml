@@ -1,0 +1,17 @@
+name: "HTTP Post Action"
+description: "Send a file to a HTTP endpoint"
+
+inputs:
+  url: # change this
+    required: true
+    description: 'URL to post to'
+  file:
+    required: true
+    description: 'Name of the file to post'
+runs:
+  using: "composite"
+  steps:
+    - name: "Send a file to a HTTP endpoint"
+      shell: bash
+      run: |
+        go run --file ${{ inputs.file }} --url ${{ inputs.url }}
