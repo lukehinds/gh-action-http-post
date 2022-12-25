@@ -14,4 +14,4 @@ runs:
     - name: "Send an Attestation to a HTTP endpoint"
       shell: bash
       run: |
-        go run -file ${{ inputs.file }} -url ${{ inputs.url }}
+        go run main.go -file ${{ inputs.file }} -url ${{ inputs.url }}
