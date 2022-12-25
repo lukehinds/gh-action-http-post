@@ -1,17 +1,17 @@
-name: "HTTP Post Action"
+name: "HTTP Attestation Post Action"
 description: "Send a file to a HTTP endpoint"
 
 inputs:
-  url: # change this
+  url: #
     required: true
-    description: 'URL to post to'
+    description: 'URL (including /upload path) to post the Attestation to'
   file:
     required: true
-    description: 'Name of the file to post'
+    description: 'Name of the Attestation to post'
 runs:
   using: "composite"
   steps:
-    - name: "Send a file to a HTTP endpoint"
+    - name: "Send an Attestation to a HTTP endpoint"
       shell: bash
       run: |
         go run --file ${{ inputs.file }} --url ${{ inputs.url }}
