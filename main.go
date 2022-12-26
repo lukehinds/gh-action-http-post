@@ -11,11 +11,8 @@ import (
 )
 
 func main() {
-	// get --file and --url flags
-	// fileflag := flag.String("file", "", "file to upload")
-	// url := flag.String("url", "", "url to upload to")
-	// flag.Parse()
-	// get file and url from environment variables
+	fmt.Println("file: ", os.Getenv("FILE"))
+	fmt.Println("url: ", os.Getenv("URL"))
 	fileflag := os.Getenv("FILE")
 	url := os.Getenv("URL")
 
@@ -27,11 +24,18 @@ func main() {
 
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
-	part, _ := writer.CreateFormFile("file", filepath.Base(file.Name()))
+	part, err := writer.CreateFormFile("file", filepath.Base(file.Name()))
+	if err != nil {
+		fmt.Printf("Error creating form file: %v", err)
+	}
 	io.Copy(part, file)
 	writer.Close()
 
-	r, _ := http.NewRequest("POST", url, body)
+	r, err := http.NewRequest("POST", url, body)
+	if err != nil {
+		fmt.Printf("Error creating request: %v", err)
+	}
+	
 	r.Header.Add("Content-Type", writer.FormDataContentType())
 	client := &http.Client{}
 	client.Do(r)
