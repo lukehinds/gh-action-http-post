@@ -11,7 +11,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Send an Attestation to a HTTP endpoint"
-      shell: bash
-      run: |
-        go run main.go -file ${{ inputs.file }} -url ${{ inputs.url }}
+    - run: go run main.go -file ${{ inputs.file }} -url ${{ inputs.url }}
+    shell: bash
