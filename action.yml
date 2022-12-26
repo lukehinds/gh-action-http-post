@@ -11,5 +11,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: go run main.go -file ${{ inputs.file }} -url ${{ inputs.url }}
+    - run: go run main.go
       shell: bash
